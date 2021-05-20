@@ -1,0 +1,38 @@
+create sequence if not exists student_seq;
+create table student
+(
+    student_id   bigint default nextval('student_seq'::regclass) not null
+        constraint student_pk
+            primary key,
+    fio  varchar(256)                                  ,
+    course   varchar(256)                                   ,
+    specialty varchar(256)
+);
+
+
+create sequence if not exists teacher_seq;
+create table teacher
+(
+    teacher_id        bigint default nextval('teacher_seq'::regclass) not null
+        constraint teacher_pk
+            primary key,
+    fio    varchar(256),
+    faculty        varchar(256)
+);
+
+create sequence if not exists ts_seq;
+create table ts
+(
+    ts_id        bigint default nextval('ts_seq'::regclass) not null
+        constraint ts_pk
+            primary key,
+    student_id    bigint,
+    teacher_id     bigint
+);
+
+alter table ts
+    add constraint student_id_fk foreign key (student_id) references student (student_id);
+alter table ts
+    add constraint teacher_id_fk foreign key (teacher_id) references teacher (teacher_id);
+alter table ts
+    add constraint uq_ts UNIQUE(teacher_id, student_id);
