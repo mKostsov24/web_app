@@ -45,6 +45,11 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
+    public Student getStudentById(Long id) {
+        return studentMapper.getStudentById(id);
+    }
+
+    @Override
     public void delete(StudentDTO studentDTO) {
         Student student = mapper.map(studentDTO, Student.class);
         studentMapper.delete(student);

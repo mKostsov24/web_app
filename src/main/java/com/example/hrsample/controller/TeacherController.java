@@ -3,6 +3,7 @@ package com.example.hrsample.controller;
 
 import com.example.hrsample.amq.JmsProducer;
 import com.example.hrsample.dto.TeacherDTO;
+import com.example.hrsample.model.Teacher;
 import com.example.hrsample.service.api.TeacherService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,13 @@ public class TeacherController {
         jmsProducer.send("do do do");
         return teacherService.getAll();
     }
+
+    @GetMapping("/{id}")
+    @ApiOperation(value = "Возвращает информацию о преподавателе по его \"id\"",notes = "В теле запроса указывается \"id\" преподавателя")
+    public Teacher getTeacherById(@PathVariable Long id) {
+        return teacherService.getTeacherById(id);
+    }
+
 
     @GetMapping("/by/{id}")
     @ApiOperation(value = "Возвращает всех преподавателей студента с данным \"id\"")

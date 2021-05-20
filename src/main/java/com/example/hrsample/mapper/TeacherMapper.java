@@ -18,6 +18,8 @@ public interface TeacherMapper {
     @Select("select * from teacher")
     List<Teacher> getAll();
 
+    @Select("select * from teacher where teacher_id=#{id} ")
+    Teacher getTeacherById(@Param("id") Long id);
 
     @Delete("delete from teacher where teacher_id = #{teacherId}")
     void delete(Teacher teacher);

@@ -37,6 +37,11 @@ public class TeacherServiceIlmpl implements TeacherService {
     }
 
     @Override
+    public Teacher getTeacherById(Long id) {
+        return teacherMapper.getTeacherById(id);
+    }
+
+    @Override
     public void delete(TeacherDTO teacherDTO) {
         Teacher teacher = mapper.map(teacherDTO, Teacher.class);
         teacherMapper.delete(teacher);

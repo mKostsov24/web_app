@@ -2,6 +2,7 @@ package com.example.hrsample.controller;
 
 import com.example.hrsample.amq.JmsProducer;
 import com.example.hrsample.dto.StudentDTO;
+import com.example.hrsample.model.Student;
 import com.example.hrsample.service.api.StudentService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,13 @@ public class StudentController {
         jmsProducer.send("do do do");
         return studentService.getAll();
     }
+
+    @GetMapping("/{id}")
+    @ApiOperation(value = "Возвращает информацию о студенте по его \"id\"",notes = "В теле запроса указывается \"id\" студента")
+    public Student getStudentById(@PathVariable Long id) {
+        return studentService.getStudentById(id);
+    }
+
 
     @GetMapping("/by/{id}")
     @ApiOperation(value = "Возвращает всех студентов преподавателя с данным \"id\"")

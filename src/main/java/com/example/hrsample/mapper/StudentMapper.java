@@ -17,6 +17,9 @@ public interface StudentMapper {
     @Select("select * from student")
     List<Student> getAll();
 
+    @Select("select * from student where student_id = #{studentId}")
+    Student getStudentById(Long studentId);
+
     @Select("Select s.* from student s join ts on ts.student_id = s.student_id join teacher t on t.teacher_id = ts.teacher_id where t.teacher_id = #{id}")
     List<Student> getAllStudentByTeacher(Long id);
 
