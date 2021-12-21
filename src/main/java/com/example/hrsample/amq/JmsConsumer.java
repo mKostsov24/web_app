@@ -1,15 +1,12 @@
 package com.example.hrsample.amq;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.jms.annotation.JmsListener;
 import org.springframework.stereotype.Service;
 
 @Service
+@Slf4j
 public class JmsConsumer {
-
-    Logger log = LoggerFactory.getLogger(JmsConsumer.class);
-
     @JmsListener(destination = "${activemq.queue.name}")
     public void receive(String message) {
         log.info("Received message='{}'", message);

@@ -5,7 +5,7 @@ import com.example.hrsample.dto.StudentDTO;
 import com.example.hrsample.model.Student;
 import com.example.hrsample.service.api.StudentService;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,16 +14,11 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/student")
 @Validated
+@RequiredArgsConstructor
 public class StudentController {
 
-    JmsProducer jmsProducer;
-    private StudentService studentService;
-
-    @Autowired
-    public StudentController(StudentService studentService, JmsProducer jmsProducer) {
-        this.studentService = studentService;
-        this.jmsProducer = jmsProducer;
-    }
+    private final JmsProducer jmsProducer;
+    private final StudentService studentService;
 
     @GetMapping
     @ApiOperation(value = "Возвращает всех студентов")
@@ -33,7 +28,7 @@ public class StudentController {
     }
 
     @GetMapping("/{id}")
-    @ApiOperation(value = "Возвращает информацию о студенте по его \"id\"",notes = "В теле запроса указывается \"id\" студента")
+    @ApiOperation(value = "Возвращает информацию о студенте по его \"id\"", notes = "В теле запроса указывается \"id\" студента")
     public Student getStudentById(@PathVariable Long id) {
         return studentService.getStudentById(id);
     }
@@ -47,14 +42,12 @@ public class StudentController {
 
     }
 
-
     @PostMapping("/save")
     @ApiOperation(value = "Позволяет сохранять студента,пришедшего в теле запроса ", notes = "Поле \"id\" вводить ненужно")
     public void save(@RequestBody StudentDTO studentDTO) {
         studentService.save(studentDTO);
         jmsProducer.send("do do do");
     }
-
 
     @DeleteMapping
     @ApiOperation(value = "Удаляет студенрта из БД по его \"id\"", notes = "В теле запроса указывается \"id\" студента")
@@ -76,6 +69,4 @@ public class StudentController {
         studentService.update(studentDTO);
         jmsProducer.send("do do do");
     }
-
-
 }

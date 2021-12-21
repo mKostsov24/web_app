@@ -1,6 +1,5 @@
 package com.example.hrsample.mapper;
 
-
 import com.example.hrsample.model.Teacher;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;

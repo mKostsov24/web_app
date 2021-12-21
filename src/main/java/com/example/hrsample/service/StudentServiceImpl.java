@@ -1,27 +1,22 @@
 package com.example.hrsample.service;
 
-
 import com.example.hrsample.dto.StudentDTO;
 import com.example.hrsample.mapper.StudentMapper;
 import com.example.hrsample.model.Student;
 import com.example.hrsample.service.api.StudentService;
+import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class StudentServiceImpl implements StudentService {
 
     private final ModelMapper mapper = new ModelMapper();
-    private StudentMapper studentMapper;
-
-    @Autowired
-    public StudentServiceImpl(StudentMapper studentMapper) {
-        this.studentMapper = studentMapper;
-    }
+    private final StudentMapper studentMapper;
 
     @Override
     public void save(StudentDTO studentDTO) {
@@ -35,7 +30,6 @@ public class StudentServiceImpl implements StudentService {
                 .map(student -> mapper.map(student, StudentDTO.class))
                 .collect(Collectors.toList());
     }
-
 
     @Override
     public List<StudentDTO> getAll() {

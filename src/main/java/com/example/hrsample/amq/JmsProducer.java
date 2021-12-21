@@ -1,25 +1,19 @@
 package com.example.hrsample.amq;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Service;
 
 @Service
+@Slf4j
+@RequiredArgsConstructor
 public class JmsProducer {
+    private final JmsTemplate jmsTemplate;
 
-    Logger log = LoggerFactory.getLogger(JmsProducer.class);
     @Value("${activemq.queue.name}")
     String destination;
-
-    private JmsTemplate jmsTemplate;
-
-    @Autowired
-    public JmsProducer(JmsTemplate jmsTemplate) {
-        this.jmsTemplate = jmsTemplate;
-    }
 
     public void send(String message) {
         jmsTemplate.convertAndSend(destination, message);

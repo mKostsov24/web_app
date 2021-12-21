@@ -1,6 +1,5 @@
 package com.example.hrsample.mapper;
 
-
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
@@ -14,6 +13,4 @@ public interface ConectionsMapper {
 
     @Delete("Delete from ts where (teacher_id = #{tId} and student_id = #{sId})")
     void deleteConection(Long tId, Long sId);
-
-
 }

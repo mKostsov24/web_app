@@ -16,7 +16,6 @@ public class JmsConfig {
 
     @Bean
     public BrokerService broker() throws Exception {
-
         BrokerService broker = new BrokerService();
         broker.setPersistent(false);
         broker.setUseJmx(true);
@@ -29,10 +28,8 @@ public class JmsConfig {
         return new JmsTemplate(new PooledConnectionFactory(brokerUrl));
     }
 
-
     @Bean
     public DefaultJmsListenerContainerFactory jmsListenerContainerFactory() {
-
         DefaultJmsListenerContainerFactory factory = new DefaultJmsListenerContainerFactory();
         factory.setConnectionFactory(new PooledConnectionFactory(brokerUrl));
         return factory;

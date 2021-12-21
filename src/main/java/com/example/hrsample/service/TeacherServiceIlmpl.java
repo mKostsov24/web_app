@@ -4,24 +4,19 @@ import com.example.hrsample.dto.TeacherDTO;
 import com.example.hrsample.mapper.TeacherMapper;
 import com.example.hrsample.model.Teacher;
 import com.example.hrsample.service.api.TeacherService;
+import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class TeacherServiceIlmpl implements TeacherService {
 
     private final ModelMapper mapper = new ModelMapper();
-    private TeacherMapper teacherMapper;
-
-    @Autowired
-    public TeacherServiceIlmpl(TeacherMapper teacherMapper) {
-        this.teacherMapper = teacherMapper;
-    }
-
+    private final TeacherMapper teacherMapper;
 
     @Override
     public void save(TeacherDTO teacherDTO) {
