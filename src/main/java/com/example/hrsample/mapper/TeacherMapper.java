@@ -9,7 +9,6 @@ import java.util.List;
 @Mapper
 @Repository
 public interface TeacherMapper {
-
     @Insert("INSERT into teacher(fio, faculty) " +
             "VALUES(#{t.fio},#{t.faculty})")
     void save(@Param("t") Teacher teacher);

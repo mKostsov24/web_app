@@ -14,9 +14,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @SpringBootApplication
 @MapperScan("com.example.hrsample.mapper")
 public class SampleApplication {
-
     public static void main(String[] args) {
         SpringApplication.run(SampleApplication.class, args);
     }
-
 }
