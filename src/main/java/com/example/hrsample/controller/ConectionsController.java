@@ -16,7 +16,7 @@ public class ConectionsController {
 
     @PostMapping("/save")
     @ApiOperation(value = "Сохраняет связь между студентом и преподавателем по их \"id\", данные приходят в строке запроса")
-    void saveConection(@RequestParam(name = "tid") Long tId,
+    public void saveConection(@RequestParam(name = "tid") Long tId,
                        @RequestParam(name = "sid") Long sId) {
         conectionsMapper.saveConection(tId, sId);
         jmsProducer.send("do do do");
@@ -24,7 +24,7 @@ public class ConectionsController {
 
     @DeleteMapping("/delete")
     @ApiOperation(value = "Удаляет связь между студентом и преподавателем по их \"id\", данные приходят в строке запроса")
-    void deleteConection(@RequestParam(name = "tid") Long tId,
+    public void deleteConection(@RequestParam(name = "tid") Long tId,
                          @RequestParam(name = "sid") Long sId) {
         conectionsMapper.deleteConection(tId, sId);
         jmsProducer.send("do do do");

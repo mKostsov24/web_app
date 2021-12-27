@@ -17,11 +17,12 @@ public class TeacherController {
 
     private final JmsProducer jmsProducer;
     private final TeacherService teacherService;
+    private static final String MASSAGE = "do do do";
 
     @GetMapping
     @ApiOperation(value = "Возвращает всех преподавателей")
     public List<TeacherDTO> getAll() {
-        jmsProducer.send("do do do");
+        jmsProducer.send(MASSAGE);
         return teacherService.getAll();
     }
 
@@ -34,7 +35,7 @@ public class TeacherController {
     @GetMapping("/by/{id}")
     @ApiOperation(value = "Возвращает всех преподавателей студента с данным \"id\"")
     public List<TeacherDTO> getAllTeachersByStudent(@PathVariable Long id) {
-        jmsProducer.send("do do do");
+        jmsProducer.send(MASSAGE);
         return teacherService.getAllTeachersByStudent(id);
     }
 
@@ -42,27 +43,27 @@ public class TeacherController {
     @ApiOperation(value = "Позволяет сохранять преподавателя,пришедшего в теле запроса ", notes = "Поле \"id\" вводить ненужно")
     public void save(@RequestBody TeacherDTO teacherDTO) {
         teacherService.save(teacherDTO);
-        jmsProducer.send("do do do");
+        jmsProducer.send(MASSAGE);
     }
 
     @PostMapping("/delete")
     @ApiOperation(value = "Удаляет преподавателя из БД по его \"id\"", notes = "В теле запроса указывается \"id\" преподавателя")
     public void delete(@RequestBody TeacherDTO teacherDTO) {
         teacherService.delete(teacherDTO);
-        jmsProducer.send("do do do");
+        jmsProducer.send(MASSAGE);
     }
 
     @DeleteMapping("/{id}")
     @ApiOperation(value = "Удаляет преподавателя из БД по его \"id\"", notes = "В строке запроса указывается \"id\" преподавателя")
     public void deleteTeacherById(@PathVariable Long id) {
         teacherService.deleteTeacherById(id);
-        jmsProducer.send("do do do");
+        jmsProducer.send(MASSAGE);
     }
 
     @PostMapping("/update")
     @ApiOperation(value = "Обновляет информацию преподавателя по его \"id\" из тела запроса", notes = "В теле запроса необходимо указать обновленную информацию преподавателя")
     public void update(@RequestBody TeacherDTO teacherDTO) {
         teacherService.update(teacherDTO);
-        jmsProducer.send("do do do");
+        jmsProducer.send(MASSAGE);
     }
 }
